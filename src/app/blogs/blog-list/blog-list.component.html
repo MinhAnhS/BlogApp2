@@ -6,7 +6,7 @@
         *ngFor="let blog of blogs"
         (click)="selectBlog(blog)"
         [class.active]="blog === selectedBlog">
-        {{blog.blog-name}}
+        {{blog.name}}
       </li>
     </ul>
     <button class="btn btn-warning" (click)="createNewBlog()">New</button>
