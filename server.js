@@ -122,7 +122,7 @@ function handleError(res, reason, message, code) {
     });
   });
   
-  app.put("/api/blogs/:id", function(req, res) {
+  app.put("/api/blogs/", function(req, res) {
     var updateDoc = req.body;
     delete updateDoc._id;
   
