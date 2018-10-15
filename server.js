@@ -122,39 +122,17 @@ function handleError(res, reason, message, code) {
   });
   
   app.put("/api/blogs/:id", function(req, res) {
-    // var updateDoc = req.body;
-    // delete updateDoc._id;
+    var updateDoc = req.body;
+    delete updateDoc._id;
 
-    // db.collection(BLOGS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
-    //   if (err) {
-    //     handleError(res, err.message, "Failed to update text");
-    //   } else {
-    //     updateDoc._id = req.params.id;
-    //     res.status(200).json(updateDoc);
-    //   }
-    // });
-
-    // Delete old values
-    db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    db.collection(BLOGS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
       if (err) {
-        handleError(res, err.message, "Failed to delete blog");
+        handleError(res, err.message, "Failed to update text");
       } else {
-        res.status(200).json(req.params.id);
+        updateDoc._id = req.params.id;
+        res.status(200).json(updateDoc);
       }
-    });
-
-    // Add new values
-    var newBlog = req.body;
-    newBlog.createDate = new Date();
-  
-    db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
-      if (err) {
-        handleError(res, err.message, "Failed to create new blog.");
-      } else {
-        res.status(201).json(doc.ops[0]);
-      }
-    });
-  
+    });  
   });
   
   app.delete("/api/blogs/:id", function(req, res) {
