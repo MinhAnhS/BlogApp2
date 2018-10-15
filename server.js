@@ -125,14 +125,6 @@ function handleError(res, reason, message, code) {
     // var updateDoc = req.body;
     // delete updateDoc._id;
 
-    db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-      if (err) {
-        handleError(res, err.message, "Failed to delete blog");
-      } else {
-        res.status(200).json(req.params.id);
-      }
-    });
-  
     // db.collection(BLOGS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
     //   if (err) {
     //     handleError(res, err.message, "Failed to update text");
@@ -142,20 +134,17 @@ function handleError(res, reason, message, code) {
     //   }
     // });
 
+    db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+      res.status(200).json(req.params.id);
+    });
+
     var newBlog = req.body;
     newBlog.createDate = new Date();
+    
+    db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
+        res.status(201).json(doc.ops[0]);
+    });
   
-    if (!req.body.name) {
-      handleError(res, "Invalid user input", "Must provide a name.", 400);
-    } else {
-      db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
-        if (err) {
-          handleError(res, err.message, "Failed to create new blog.");
-        } else {
-          res.status(201).json(doc.ops[0]);
-        }
-      });
-    }
   });
   
   app.delete("/api/blogs/:id", function(req, res) {
