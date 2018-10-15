@@ -135,13 +135,13 @@ function handleError(res, reason, message, code) {
     // });
 
     // Delete old values
-    // db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-    //   if (err) {
-    //     handleError(res, err.message, "Failed to delete blog");
-    //   } else {
-    //     res.status(200).json(req.params.id);
-    //   }
-    // });
+    db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+      if (err) {
+        handleError(res, err.message, "Failed to delete blog");
+      } else {
+        res.status(200).json(req.params.id);
+      }
+    });
 
     // Add new values
     var newBlog = req.body;
