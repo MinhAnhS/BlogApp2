@@ -147,17 +147,13 @@ function handleError(res, reason, message, code) {
     var newBlog = req.body;
     newBlog.createDate = new Date();
   
-    if (!req.body.name) {
-      handleError(res, "Invalid user input", "Must provide a name.", 400);
-    } else {
-      db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
-        if (err) {
-          handleError(res, err.message, "Failed to create new blog.");
-        } else {
-          res.status(201).json(doc.ops[0]);
-        }
-      });
-    }
+    db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new blog.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
   
   });
   
