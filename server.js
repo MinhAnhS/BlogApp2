@@ -134,16 +134,30 @@ function handleError(res, reason, message, code) {
     //   }
     // });
 
+    // Delete old values
     db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-      res.status(200).json(req.params.id);
+      if (err) {
+        handleError(res, err.message, "Failed to delete blog");
+      } else {
+        res.status(200).json(req.params.id);
+      }
     });
 
-    var newBlog = req.body;
-    newBlog.createDate = new Date();
-    
-    db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
-        res.status(201).json(doc.ops[0]);
-    });
+    // Add new values
+    // var newBlog = req.body;
+    // newBlog.createDate = new Date();
+  
+    // if (!req.body.name) {
+    //   handleError(res, "Invalid user input", "Must provide a name.", 400);
+    // } else {
+    //   db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
+    //     if (err) {
+    //       handleError(res, err.message, "Failed to create new blog.");
+    //     } else {
+    //       res.status(201).json(doc.ops[0]);
+    //     }
+    //   });
+    // }
   
   });
   
