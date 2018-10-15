@@ -73,11 +73,10 @@ function handleError(res, reason, message, code) {
     }
   });
   
-  /*  "/api/contacts/:id"
-   *    GET: find contact by id
-   *    PUT: update contact by id
-   *    DELETE: deletes contact by id
-   */
+  /*  "/api/blogs"
+ *    GET: finds all contacts
+ *    POST: creates a new contact
+ */
   
   app.get("/api/blogs", function(req, res) {
     db.collection(BLOGS_COLLECTION).find({}).toArray(function(err, docs) {
@@ -122,18 +121,41 @@ function handleError(res, reason, message, code) {
     });
   });
   
-  app.put("/api/blogs/", function(req, res) {
-    var updateDoc = req.body;
-    delete updateDoc._id;
-  
-    db.collection(BLOGS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+  app.put("/api/blogs/:id", function(req, res) {
+    // var updateDoc = req.body;
+    // delete updateDoc._id;
+
+    db.collection(BLOGS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
       if (err) {
-        handleError(res, err.message, "Failed to update text");
+        handleError(res, err.message, "Failed to delete blog");
       } else {
-        updateDoc._id = req.params.id;
-        res.status(200).json(updateDoc);
+        res.status(200).json(req.params.id);
       }
     });
+  
+    // db.collection(BLOGS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+    //   if (err) {
+    //     handleError(res, err.message, "Failed to update text");
+    //   } else {
+    //     updateDoc._id = req.params.id;
+    //     res.status(200).json(updateDoc);
+    //   }
+    // });
+
+    var newBlog = req.body;
+    newBlog.createDate = new Date();
+  
+    if (!req.body.name) {
+      handleError(res, "Invalid user input", "Must provide a name.", 400);
+    } else {
+      db.collection(BLOGS_COLLECTION).insertOne(newBlog, function(err, doc) {
+        if (err) {
+          handleError(res, err.message, "Failed to create new blog.");
+        } else {
+          res.status(201).json(doc.ops[0]);
+        }
+      });
+    }
   });
   
   app.delete("/api/blogs/:id", function(req, res) {
