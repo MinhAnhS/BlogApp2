@@ -1,6 +1,6 @@
 <div *ngIf="blog" class="row">
   <div class="col-md-12">
-    <h2 *ngIf="blog._id" [(ngModel)]="blog.name"></h2> 
+    <h2 *ngIf="blog._id" name="blog-name" [(ngModel)]="blog.name"></h2> 
     <h2 *ngIf="!blog._id">New Blog</h2>
   </div>
 </div>
@@ -12,11 +12,11 @@
     </div> -->
     <div class="form-group">
       <label for="blog-doc-author">Author Name</label>
-      <h3 class="form-control" name="blog-doc-author" [(ngModel)]="blog.doc.author" placeholder="Author Name"></h3>
+      <h3 class="form-control" name="blog-doc-author" [(ngModel)]="blog.doc.author"></h3>
     </div>
     <div class="form-group">
       <label for="blog-doc-content">Content</label>
-      <p class="form-control" name="blog-doc-content" [(ngModel)]="blog.doc.content" placeholder="Content..."></p>
+      <p class="form-control" name="blog-doc-content" [(ngModel)]="blog.doc.content"></p>
     </div>
     <!-- <button class="btn btn-primary" *ngIf="!blog._id" (click)="createBlog(blog)">Save</button>
     <button class="btn btn-info" *ngIf="blog._id" (click)="updateBlog(blog)">Update</button>
