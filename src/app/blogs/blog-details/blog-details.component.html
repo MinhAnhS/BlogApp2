@@ -8,11 +8,13 @@
   <form class="col-md-12">
     <div class="form-group">
       <label for="blog-name">Name</label>
-      <input class="form-control" name="blog-name" [(ngModel)]="blog.name" placeholder="Blog Name"/>
+      <input *ngIf="!blog._id" class="form-control" name="blog-name" [(ngModel)]="blog.name" placeholder="Blog Name"/>
+      <h3>{{blog.name}}</h3>
     </div>
     <div class="form-group">
       <label for="blog-doc-author">Author Name</label>
-      <input class="form-control" name="blog-doc-author" [(ngModel)]="blog.doc.author" placeholder="Author Name"/>
+      <input *ngIf="!blog._id" class="form-control" name="blog-doc-author" [(ngModel)]="blog.doc.author" placeholder="Author Name"/>
+      <h4>{{blog.doc.author}}</h4>
     </div>
     <div class="form-group">
       <label for="blog-doc-content">Content</label>
