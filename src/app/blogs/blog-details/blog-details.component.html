@@ -16,8 +16,12 @@
     </div>
     <div class="form-group">
       <label for="blog-doc-content">Content</label>
-      <textarea class="form-control text-content" name="blog-doc-content" [(ngModel)]="blog.doc.content" placeholder="Content..."></textarea>
+      <!-- <textarea class="form-control text-content" name="blog-doc-content" [(ngModel)]="blog.doc.content" placeholder="Content..."></textarea> -->
+      <p>{{blog.doc.content}}</p>
     </div>
+
+
+    
     <!-- <button class="btn btn-primary" *ngIf="!blog._id" (click)="createBlog(blog)">Save</button>
     <button class="btn btn-info" *ngIf="blog._id" (click)="updateBlog(blog)">Update</button>
     <button class="btn btn-danger" *ngIf="blog._id" (click)="deleteBlog(blog._id)">Delete</button> -->
