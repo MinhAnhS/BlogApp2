@@ -19,7 +19,7 @@
     <div class="form-group">
       <label *ngIf="!blog._id" for="blog-doc-content">Content</label>
       <textarea *ngIf="!blog._id" class="form-control text-content" name="blog-doc-content" [(ngModel)]="blog.doc.content" placeholder="Content..."></textarea>
-      <p *ngIf="blog._id">{{blog.doc.content}}</p>
+      <p *ngIf="blog._id" class="content">{{blog.doc.content}}</p>
     </div>
 
 
