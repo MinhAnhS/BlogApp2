@@ -30,6 +30,6 @@
 
     <button class="btn btn-primary" *ngIf="!blog._id" (click)="createBlog(blog)">Save</button>
     <!-- <button class="btn btn-info" *ngIf="blog._id" (click)="updateBlog(blog)">Update</button> -->
-    <button class="btn btn-danger" *ngIf="blog._id" (click)="deleteBlog(blog._id)">Delete</button>
+    <button class="btn btn-outline-danger" *ngIf="blog._id" (click)="deleteBlog(blog._id)">Delete</button>
   </form>
 </div>
