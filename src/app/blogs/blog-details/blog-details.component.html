@@ -9,17 +9,17 @@
     <div class="form-group">
       <label *ngIf="!blog._id" for="blog-name">Name</label>
       <input *ngIf="!blog._id" class="form-control" name="blog-name" [(ngModel)]="blog.name" placeholder="Blog Name"/>
-      <h2 *ngIf="blog._id">{{blog.name}}</h2>
+      <!--<h2 *ngIf="blog._id">{{blog.name}}</h2> -->
     </div>
     <div class="form-group">
       <label *ngIf="!blog._id" for="blog-doc-author">Author's Name</label>
       <input *ngIf="!blog._id" class="form-control" name="blog-doc-author" [(ngModel)]="blog.doc.author" placeholder="Author Name"/>
-      <p *ngIf="blog._id" class="font-weight-light font-italic">{{blog.doc.author}}</p>
+      <!-- <p *ngIf="blog._id" class="font-weight-light font-italic">{{blog.doc.author}}</p>-->
     </div>
     <div class="form-group">
       <label *ngIf="!blog._id" for="blog-doc-content">Content</label>
       <textarea *ngIf="!blog._id" class="form-control text-content" name="blog-doc-content" [(ngModel)]="blog.doc.content" placeholder="Content..."></textarea>
-      <p *ngIf="blog._id">{{blog.doc.content}}</p>
+      <!--<p *ngIf="blog._id">{{blog.doc.content}}</p> -->
     </div>
 
 
